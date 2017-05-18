@@ -33,13 +33,16 @@ public class BookAction extends ActionSupport {
 		user=userService.findByKey(uId);
 		if(user.getuType()==0)
 		{
-			if(page==null) page=1;  //if page didn't transfer the value 
+			if(page==null) 
+				{
+				page=(Integer) ActionContext.getContext().getSession().get("PAGE");
+				if(page==null) page=1;  //if page didn't transfer the value 
+				else if(pageop!=null) 		page+=pageop;
+				}
 			//set the page =1
-			if(pageop!=null) {
-				page+=pageop;
-				pageop=null;
-			}	
+			
 			books=bookService.findPage(page);
+			ActionContext.getContext().getSession().put("PAGE",page);
 		}
 		return SUCCESS;
 	
