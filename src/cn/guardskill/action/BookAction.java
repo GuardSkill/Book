@@ -13,6 +13,8 @@ import cn.guardskill.service.UserService;
 public class BookAction extends ActionSupport {
 	private static final long serialVersionUID = 2L;
 	private Book book;
+	private Integer page;
+	private Integer pageop;
 	private List<Book> books=new ArrayList<Book>();
 	private BookService bookService;
 	public List<Book> getBooks() {
@@ -31,7 +33,13 @@ public class BookAction extends ActionSupport {
 		user=userService.findByKey(uId);
 		if(user.getuType()==0)
 		{
-			books=bookService.findPage(1);
+			if(page==null) page=1;  //if page didn't transfer the value 
+			//set the page =1
+			if(pageop!=null) {
+				page+=pageop;
+				pageop=null;
+			}	
+			books=bookService.findPage(page);
 		}
 		return SUCCESS;
 	
@@ -54,5 +62,17 @@ public class BookAction extends ActionSupport {
 	}
 	public void setBookService(BookService bookService) {
 		this.bookService = bookService;
+	}
+	public Integer getPage() {
+		return page;
+	}
+	public void setPage(Integer page) {
+		this.page = page;
+	}
+	public Integer getPageop() {
+		return pageop;
+	}
+	public void setPageop(Integer pageop) {
+		this.pageop = pageop;
 	}
 }

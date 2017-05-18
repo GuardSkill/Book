@@ -88,13 +88,13 @@
 			</tbody>
 		</table>
 		<ul class="pagination">
-			<li><a href="#">Prev</a></li>
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#">Next</a></li>
+			<li><a href="showData?pageop=-1">Prev</a></li>
+			<li><a href="showData?page=1">1</a></li>
+			<li><a href="showData?page=2">2</a></li>
+			<li><a href="showData?page=3">3</a></li>
+			<li><a href="showData?page=4">4</a></li>
+			<li><a href="showData?page=5">5</a></li>
+			<li><a href="showData?pageop=1">Next</a></li>
 		</ul>
 	</div>
 </body>
