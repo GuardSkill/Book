@@ -24,14 +24,19 @@
 				<nav class="navbar navbar-default navbar-inverse navbar-fixed-top"
 					role="navigation">
 				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span><span
+							class="icon-bar"></span><span class="icon-bar"></span><span
+							class="icon-bar"></span>
+					</button>
 					<a class="navbar-brand" href="#">首页</a>
 				</div>
 
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li ><a href="User/manshowdata.jsp">图书信息</a></li>
-						<li class="active"><a href="User/newbook.jsp">添加图书</a></li>
+						<li class="active"><a href="#">我的借阅信息</a></li>
 
 					</ul>
 
@@ -52,32 +57,47 @@
 		<div class="page-header">
 			<h1>Azure</h1>
 		</div>
-		<form action="newGood" method="post" enctype="mutipart/form-data">
-			<div class="form-group">
-				<input name="book.bName" type="text" class="form-control"
-					placeholder="书籍名称" />
-			</div>
-			<div class="form-group">
-				<input name="book.bWriter" type="text" class="form-control"
-					placeholder="作者" />
-			</div>
-			<div class="form-group">
-				<input name="book.bPress" type="text" class="form-control"
-					placeholder="出版社" />
-			</div>
-			<div class="form-group">
-				<input name="book.bMaxnum" type="text" class="form-control"
-					placeholder="数量" />
-			</div>
-			<div class="form-group">
-				<textarea name="book.bDesc" class="form-control"
-					placeholder="请君好好描述哦~" rows="5"></textarea>
-			</div>
-			<div class="form-group">
-				<button type="submit" class="btn btn-default btn-primary">确定入库</button>
-				<button type="button" class="btn btn-default btn-primary">返回</button>
-			</div>
-		</form>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>书名</th>
+					<th>作者</th>
+					<th>出版社</th>
+					<th>现存数</th>
+					<th>总数</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>高等数学</td>
+					<td>高极端出版社</td>
+					<td>1</td>
+					<td>2</td>
+				</tr>
+				<tr class="success">
+					<td>2</td>
+					<td>高等数学</td>
+					<td>高极端出版社</td>
+					<td>1</td>
+					<td>2</td>
+				</tr>
+				<tr class="error">
+					<td>3</td>
+					<td>高等数学</td>
+					<td>高极端出版社</td>
+					<td>1</td>
+					<td>2</td>
+				</tr>
+				<tr class="warning">
+					<td>4</td>
+					<td>高等数学</td>
+					<td>高极端出版社</td>
+					<td>1</td>
+					<td>2</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </body>
 </html>

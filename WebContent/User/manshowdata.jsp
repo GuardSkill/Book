@@ -24,12 +24,6 @@ request.getServerPort()+path+"/";
 				<nav class="navbar navbar-default navbar-inverse navbar-fixed-top"
 					role="navigation">
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span><span
-							class="icon-bar"></span><span class="icon-bar"></span><span
-							class="icon-bar"></span>
-					</button>
 					<a class="navbar-brand" href="#">首页</a>
 				</div>
 
@@ -37,7 +31,7 @@ request.getServerPort()+path+"/";
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="#">图书信息</a></li>
-						<li ><a href="#">添加图书</a></li>
+						<li ><a href="User/newbook.jsp">添加图书</a></li>
 
 					</ul>
 				

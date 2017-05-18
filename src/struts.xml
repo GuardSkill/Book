@@ -46,7 +46,7 @@
        		<param name="inputName">result</param>  
    			 </result>  
    		</action>
-   		 <action name="newBook" class="cn.guardskill.action.BookAction" method="newGood">
+   		 <action name="newBook" class="bookAction" method="newGood">
    			 <result name="none"  >/User/newbook.jsp</result>
    			 <result name="success"  >/User/welcome.jsp</result>
         </action>   

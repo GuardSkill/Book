@@ -52,7 +52,7 @@
 	<!-- map struts's action to really entity -->
 	<bean id="userAction" class="cn.guardskill.action.UserAction" 
 	scope="prototype" p:userService-ref="userService"/>
-	<bean id="newBook" class="cn.guardskill.action.BookAction" 
+	<bean id="bookAction" class="cn.guardskill.action.BookAction" 
 	scope="prototype" p:bookService-ref="BookService"/>
 
 	<!-- 配置事务管理Bean -->

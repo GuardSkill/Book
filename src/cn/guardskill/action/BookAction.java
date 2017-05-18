@@ -5,13 +5,10 @@ import cn.guardskill.orm.Book;
 import cn.guardskill.service.BookService;
 
 public class BookAction extends ActionSupport {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2L;
 	private Book book;
 	private BookService bookService;
+	
 	public String newBook()  throws Exception{
 		Integer uId=(Integer) ActionContext.getContext().getSession().get("UID");
 		//take uId from memory
