@@ -28,7 +28,52 @@ public class Info {
 	@ManyToOne(targetEntity=Book.class)
 	@JoinColumn(name="i_bId",referencedColumnName="bId",nullable=false)
 	private Book iBook;   ////the column is i_bId in database 
-	
-	
-	
+
+	public Integer getiId() {
+		return iId;
+	}
+
+	public void setiId(Integer iId) {
+		this.iId = iId;
+	}
+
+	public Date getiFirstTime() {
+		return iFirstTime;
+	}
+
+	public void setiFirstTime(Date iFirstTime) {
+		this.iFirstTime = iFirstTime;
+	}
+
+	public Date getiReturnTime() {
+		return iReturnTime;
+	}
+
+	public void setiReturnTime(Date iReturnTime) {
+		this.iReturnTime = iReturnTime;
+	}
+
+	public Integer getiStatus() {
+		return iStatus;
+	}
+
+	public void setiStatus(Integer iStatus) {
+		this.iStatus = iStatus;
+	}
+
+	public User getiUser() {
+		return iUser;
+	}
+
+	public void setiUser(User iUser) {
+		this.iUser = iUser;
+	}
+
+	public Book getiBook() {
+		return iBook;
+	}
+
+	public void setiBook(Book iBook) {
+		this.iBook = iBook;
+	}
 }

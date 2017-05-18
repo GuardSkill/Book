@@ -31,13 +31,13 @@ public class UserAction extends ActionSupport{
 		ActionContext ctx=ActionContext.getContext();//build ActionCtx
 		if(!validateLogin())  //input invalid
 			{
-			addActionMessage("ÇëºÃºÃÊäÈë");
+			addActionMessage("è¯·å¥½å¥½è¾“å…¥");
 			return NONE;  
 			}
 		 User userdata=userService.loginUser(user);
 		 if(userdata==null)
 			 {
-			 addActionMessage("ÄúÊä´íÁË");
+			 addActionMessage("ç”¨æˆ·å·²ç»å­˜åœ¨");
 			 return NONE;	//if login not success
 			 }
 		 else 
@@ -51,12 +51,12 @@ public class UserAction extends ActionSupport{
 	public String userAdd () throws Exception
 	{
 		if (!validateRegister()) {
-			addActionMessage("ÇëºÃºÃÊäÈë");
+			addActionMessage("è¯·å¥½å¥½è¾“å…¥");
 			return NONE;
 		}
 		Integer uId = userService.addUser(user);
 		if (uId == null) {
-			addActionMessage("ÓÃ»§ÒÑ¾­´æÔÚ");
+			addActionMessage("æ³¨å†Œå¤±è´¥");
 			return NONE; // if login not success
 		} else
 		return SUCCESS;
@@ -67,15 +67,15 @@ public class UserAction extends ActionSupport{
 	{
 		if(!validateName())
 		{
-			inputStream=new ByteArrayInputStream("ÇëºÃºÃÊäÈë"  
+			inputStream=new ByteArrayInputStream("ï¿½ï¿½Ãºï¿½ï¿½ï¿½ï¿½ï¿½"  
 					.getBytes("UTF-8"));  
 		}
 		User exisUser =userService.findByName(user.getuName());  
 	    //query if this uName is Already exist in database  
 		/*get response  	*/	
-		inputStream =(exisUser==null)? new ByteArrayInputStream("ÓÃ»§Ãû¿ÉÓÃ"  
+		inputStream =(exisUser==null)? new ByteArrayInputStream("ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"  
 	                .getBytes("UTF-8"))  
-	            : new ByteArrayInputStream("ÓÃ»§Ãû´æÔÚ"  
+	            : new ByteArrayInputStream("ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"  
 	                .getBytes("UTF-8"));  
 	    return NONE;  
 	}

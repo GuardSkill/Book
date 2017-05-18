@@ -16,7 +16,7 @@
   <property name="hibernate.show_sql">true</property>
   <property name="hibernate.format_sql">true</property>
   <mapping class="cn.guardskill.orm.User" />
-  <mapping class="cn.guardskill.orm.Good" />
-  <mapping class="cn.guardskill.orm.Indent" />
+  <mapping class="cn.guardskill.orm.Bood" />
+  <mapping class="cn.guardskill.orm.Info" />
  </session-factory>
 </hibernate-configuration>
