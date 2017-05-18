@@ -14,17 +14,9 @@ public class UserAction extends ActionSupport{
 	private static final long serialVersionUID = 1L;
 	private UserService userService;
 	//this interface is implement by UserServiceImp (Spring bean)
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
-	private User user;
-		
+	private User user;	
 	/* for AJAX output*/
-	 private InputStream inputStream; 
-	 public InputStream getResult()  
-	    {  
-	        return inputStream;  
-	    }  
+	 private InputStream inputStream;  
 	 /*user login*/
 	public String userLogin () throws Exception
 	 {
@@ -37,14 +29,18 @@ public class UserAction extends ActionSupport{
 		 User userdata=userService.loginUser(user);
 		 if(userdata==null)
 			 {
-			 addActionMessage("用户已经存在");
+			 addActionMessage("用户名或密码错误");
 			 return NONE;	//if login not success
 			 }
 		 else 
 			 {
 			 ctx.getSession().put("UID", userdata.getuId());
 			 //put the data to the memory
-			 return SUCCESS;
+			 if(userdata.getuType()==null) return SUCCESS;
+			 else if(userdata.getuType()==1) return "student";
+			 else if(userdata.getuType()==2) return "manager";
+			 else if (userdata.getuType()==3)return "admin";
+			 else return ERROR;
 			 }
 	 }
 	 /*user sign up*/
@@ -57,7 +53,7 @@ public class UserAction extends ActionSupport{
 		Integer uId = userService.addUser(user);
 		if (uId == null) {
 			addActionMessage("注册失败");
-			return NONE; // if login not success
+			return NONE; // if register not success
 		} else
 		return SUCCESS;
 		
@@ -67,23 +63,23 @@ public class UserAction extends ActionSupport{
 	{
 		if(!validateName())
 		{
-			inputStream=new ByteArrayInputStream("��ú�����"  
+			inputStream=new ByteArrayInputStream("请好好输入"  
 					.getBytes("UTF-8"));  
 		}
-		User exisUser =userService.findByName(user.getuName());  
+		User existUser =userService.findByName(user.getuName());  
 	    //query if this uName is Already exist in database  
 		/*get response  	*/	
-		inputStream =(exisUser==null)? new ByteArrayInputStream("�û�������"  
+		inputStream =(existUser==null)? new ByteArrayInputStream("用户名可用"  
 	                .getBytes("UTF-8"))  
-	            : new ByteArrayInputStream("�û�������"  
+	            : new ByteArrayInputStream("用户名已存在"  
 	                .getBytes("UTF-8"));  
 	    return NONE;  
 	}
 	public String userOut() throws IOException
 	{
 	if(ActionContext.getContext().getSession().remove("UID")==null)
-    return ERROR;
-	else return SUCCESS;
+    return ERROR;  //remove fail
+	else return SUCCESS;  //remove success
 	}
 
 	
@@ -99,7 +95,7 @@ public class UserAction extends ActionSupport{
 		  ||user.getuName().length()<4||user.getuPassword().length()>15
           ||user.getuPassword().length()<4
           ||user.getuPassword().trim().isEmpty()
-		  ||user.getuPhone().trim().isEmpty()) return false;
+		  ||user.getuEmail().trim().isEmpty()) return false;
 		else return true;
 	}
 	protected Boolean validateLogin(){ 
@@ -110,6 +106,12 @@ public class UserAction extends ActionSupport{
 		else return true;
 	}
 	
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+	public InputStream getResult() {
+		return inputStream;
+	}
 	public User getUser() {
 		return user;
 	}

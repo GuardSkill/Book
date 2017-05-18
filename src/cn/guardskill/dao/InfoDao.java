@@ -2,5 +2,5 @@ package cn.guardskill.dao;
 
 import cn.guardskill.orm.Info;
 
-public interface IndentDao extends BaseDao<Info>{
+public interface InfoDao extends BaseDao<Info>{
 }

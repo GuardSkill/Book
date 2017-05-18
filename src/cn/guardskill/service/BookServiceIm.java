@@ -1,24 +1,23 @@
 package cn.guardskill.service;
 
-import cn.guardskill.dao.GoodDao;
+import cn.guardskill.dao.BookDao;
 import cn.guardskill.dao.UserDao;
 import cn.guardskill.orm.Book;
 import cn.guardskill.orm.User;
 
-public class GoodServiceIm  implements  GoodService{
-	private GoodDao goodDao;
+public class BookServiceIm  implements  BookService{
+	private BookDao bookDao;
 	private UserDao userDao;
 	private User user;
 	@Override
-	public Integer  addGood(Book good,Integer uId) {
+	public Integer  addBook(Book book,Integer uId) {
 		user=userDao.get(User.class, uId);
 		if(user==null)
 		{
 			System.out.println("uId Error|database error,No  user with the uId");
 			return null;
 		}
-		good.setgBuilder(user);
-		return (Integer) goodDao.save(good);
+		return (Integer) bookDao.save(book);
 	}
 
 	@Override
@@ -33,12 +32,17 @@ public class GoodServiceIm  implements  GoodService{
 		return null;
 		
 	}
-	public void setGoodDao(GoodDao goodDao) {
-		this.goodDao = goodDao;
-	}
 
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
+	}
+
+	public UserDao getUserDao() {
+		return userDao;
+	}
+
+	public void setBookDao(BookDao bookDao) {
+		this.bookDao = bookDao;
 	}
 
 

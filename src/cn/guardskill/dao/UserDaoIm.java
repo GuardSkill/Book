@@ -5,7 +5,7 @@ import java.util.List;
 import cn.guardskill.orm.User;
 
 
-public class UserHibernate extends MarketDao<User> implements UserDao
+public class UserDaoIm extends UniversalDaoIm<User> implements UserDao
 {
 	@SuppressWarnings("unchecked")
 	public User getByName(Class<User> entityClazz,String name)

@@ -7,7 +7,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 
-public class MarketDao<T> implements BaseDao<T> {
+public class UniversalDaoIm<T> implements BaseDao<T> {
 	private SessionFactory sessionFactory;
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;

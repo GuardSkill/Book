@@ -19,14 +19,15 @@ public class UserServiceIm implements UserService{
 	public Integer addUser(User user) {	
 		//subtract " " and calculate  if empty
 		User test=userDao.getByName(User.class,user.getuName());
-		if(test!=null) return null;  //already exist
+		if(test!=null) return null;  //the name already exist 
+		
 		else return (Integer) userDao.save(user);
 		
 	}
 	public User loginUser(User user) {
 		User userdata=userDao.getByNameAndPass(User.class,user.getuName(),user.getuPassword());
 		if(userdata==null) 	return null;
-		//用户名或密码错误
+		//user name or password isn't right
 		else return userdata;
 		
 	}

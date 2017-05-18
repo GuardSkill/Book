@@ -23,8 +23,8 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>cn.guardskill.orm.User</value>
-				<value>cn.guardskill.orm.Good</value>
-				<value>cn.guardskill.orm.Indent</value>
+				<value>cn.guardskill.orm.Book</value>
+				<value>cn.guardskill.orm.Info</value>
 			</list>
 		</property>
 		<!-- <property name="mappingDirectoryLocations"> <list> <value>>classpath:cn/guardskill/orm</value> 
@@ -41,24 +41,26 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="userDao" class="cn.guardskill.dao.UserHibernate" p:sessionFactory-ref="sessionFactory" />
-	<bean id="goodDao" class="cn.guardskill.dao.GoodHibernate" p:sessionFactory-ref="sessionFactory" />
-	<bean id="userService" class="cn.guardskill.service.UserServiceIm" p:userDao-ref="userDao" />
-	<bean id="goodService" class="cn.guardskill.service.GoodServiceIm"
-		p:userDao-ref="userDao" p:goodDao-ref="goodDao"/>
+	<bean id="userDao" class="cn.guardskill.dao.UserDaoIm" 
+	p:sessionFactory-ref="sessionFactory" />
+	<bean id="bookDao" class="cn.guardskill.dao.BookDaoIm
+	" p:sessionFactory-ref="sessionFactory" />
+	<bean id="userService" class="cn.guardskill.service.UserServiceIm" 
+	p:userDao-ref="userDao" />
+	<bean id="bookService" class="cn.guardskill.service.BookServiceIm"
+		p:userDao-ref="userDao" p:bookDao-ref="bookDao"/>
 	<!-- map struts's action to really entity -->
 	<bean id="userAction" class="cn.guardskill.action.UserAction" 
 	scope="prototype" p:userService-ref="userService"/>
-	<bean id="newGood" class="cn.guardskill.action.GoodAction" 
-	scope="prototype" p:goodService-ref="goodService"/>
-	
+	<bean id="newBook" class="cn.guardskill.action.BookAction" 
+	scope="prototype" p:bookService-ref="BookService"/>
+
 	<!-- 配置事务管理Bean -->
 	<bean id="transactionManager"
 	class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 	<property name="sessionFactory" ref="sessionFactory" />
 	<property name="dataSource" ref="dataSource"></property>
 	</bean>
-	
 	<tx:annotation-driven transaction-manager="transactionManager"/> 
     <!-- 配置事务增强 -->
     

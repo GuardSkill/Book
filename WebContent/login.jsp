@@ -114,8 +114,5 @@ input {
 		  <button class="but" type="button" onclick="window.location.href='register.jsp'">注册</button>
 		</form>
 	</div>
-
-
-
 </body>
 </html>

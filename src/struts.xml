@@ -31,7 +31,10 @@
         	<result name="none"  >/register.jsp</result>
         </action>
         <action name="userLogin" class="userAction" method="userLogin" >
-        	<result name="success">/User/showdata.jsp</result>  
+        	<result name="success">/User/showdata.jsp</result> 
+        	<result name="student">/User/stushowdata.jsp</result> 
+        	<result name="manager">/User/manshowdata.jsp</result>  
+        	<result name="admin">/User/admshowdata.jsp</result>   
         	<result name="none"  >/login.jsp</result>
         </action>
         <action name="userExist" class="userAction" method="userExist" >
@@ -43,12 +46,9 @@
        		<param name="inputName">result</param>  
    			 </result>  
    		</action>
-   		 <action name="newGood" class="cn.guardskill.action.GoodAction" method="newGood">
-   			 <result name="none"  >/User/newgood.html</result>
+   		 <action name="newBook" class="cn.guardskill.action.BookAction" method="newGood">
+   			 <result name="none"  >/User/newbook.jsp</result>
    			 <result name="success"  >/User/welcome.jsp</result>
         </action>   
-        <action name="upload" class="cn.guardskill.action.GoodAction" method="upload" >
-        	<result name="success">/User/newgood.html</result>
-        </action>
     </package>
 </struts>
