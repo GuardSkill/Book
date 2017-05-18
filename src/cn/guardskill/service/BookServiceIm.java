@@ -1,5 +1,7 @@
 package cn.guardskill.service;
 
+import java.util.List;
+
 import cn.guardskill.dao.BookDao;
 import cn.guardskill.dao.UserDao;
 import cn.guardskill.orm.Book;
@@ -20,18 +22,6 @@ public class BookServiceIm  implements  BookService{
 		return (Integer) bookDao.save(book);
 	}
 
-	@Override
-	public Book findByKey(Integer uName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Book findByName(String uName) {
-		// TODO Auto-generated method stub
-		return null;
-		
-	}
 
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
@@ -45,5 +35,10 @@ public class BookServiceIm  implements  BookService{
 		this.bookDao = bookDao;
 	}
 
+
+	@Override
+	public List<Book> findPage(Integer pageNo) {
+		return bookDao.findAllByPage(pageNo,5);
+	}
 
 }

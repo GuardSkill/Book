@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@ taglib uri="/struts-tags" prefix="s"%>
+<%@ taglib uri="/struts-tags" prefix="s" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -24,19 +24,13 @@
 				<nav class="navbar navbar-default navbar-inverse navbar-fixed-top"
 					role="navigation">
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span><span
-							class="icon-bar"></span><span class="icon-bar"></span><span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">首页</a>
+					<a class="navbar-brand" href="User/showdata.jsp">个人首页</a>
 				</div>
 
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">我的借阅信息</a></li>
+						<li class="active"><a href="User/showdata.jsp">图书信息</a></li>
 
 					</ul>
 
@@ -65,39 +59,43 @@
 					<th>出版社</th>
 					<th>现存数</th>
 					<th>总数</th>
+					<th>描述</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>1</td>
-					<td>高等数学</td>
-					<td>高极端出版社</td>
-					<td>1</td>
-					<td>2</td>
-				</tr>
-				<tr class="success">
-					<td>2</td>
-					<td>高等数学</td>
-					<td>高极端出版社</td>
-					<td>1</td>
-					<td>2</td>
-				</tr>
-				<tr class="error">
-					<td>3</td>
-					<td>高等数学</td>
-					<td>高极端出版社</td>
-					<td>1</td>
-					<td>2</td>
-				</tr>
-				<tr class="warning">
-					<td>4</td>
-					<td>高等数学</td>
-					<td>高极端出版社</td>
-					<td>1</td>
-					<td>2</td>
-				</tr>
+				<s:iterator value="books" var="bo" status="st">
+					<s:if test="#st.even">
+						<tr class="success">
+							<td><s:property value="bName"></s:property></td>
+							<td><s:property value="bWriter"></s:property></td>
+							<td><s:property value="bPress"></s:property></td>
+							<td><s:property value="bNownum"></s:property></td>
+							<td><s:property value="bMaxnum"></s:property></td>
+							<td><s:property value="bDesc"></s:property></td>
+						</tr>
+					</s:if>
+					<s:else>
+						<tr class="error">
+							<td><s:property value="bName"></s:property></td>
+							<td><s:property value="bWriter"></s:property></td>
+							<td><s:property value="bPress"></s:property></td>
+							<td><s:property value="bNownum"></s:property></td>
+							<td><s:property value="bMaxnum"></s:property></td>
+							<td><s:property value="bDesc"></s:property></td>
+						</tr>
+					</s:else>
+					</s:iterator>
 			</tbody>
 		</table>
+		<ul class="pagination">
+			<li><a href="#">Prev</a></li>
+			<li><a href="#">1</a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">5</a></li>
+			<li><a href="#">Next</a></li>
+		</ul>
 	</div>
 </body>
 </html>

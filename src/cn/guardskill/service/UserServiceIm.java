@@ -20,9 +20,11 @@ public class UserServiceIm implements UserService{
 		//subtract " " and calculate  if empty
 		User test=userDao.getByName(User.class,user.getuName());
 		if(test!=null) return null;  //the name already exist 
-		
-		else return (Integer) userDao.save(user);
-		
+		else 
+			{
+			user.setuType(0);
+			return (Integer) userDao.save(user);
+			}	
 	}
 	public User loginUser(User user) {
 		User userdata=userDao.getByNameAndPass(User.class,user.getuName(),user.getuPassword());

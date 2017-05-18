@@ -24,13 +24,13 @@ request.getServerPort()+path+"/";
 				<nav class="navbar navbar-default navbar-inverse navbar-fixed-top"
 					role="navigation">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="#">首页</a>
+					<a class="navbar-brand" href="User/manshowdata.jsp">个人首页</a>
 				</div>
 
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">图书信息</a></li>
+						<li class="active"><a href="User/manshowdata.jsp"">图书信息</a></li>
 						<li ><a href="User/newbook.jsp">添加图书</a></li>
 
 					</ul>

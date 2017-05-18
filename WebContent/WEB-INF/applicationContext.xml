@@ -53,7 +53,8 @@
 	<bean id="userAction" class="cn.guardskill.action.UserAction" 
 	scope="prototype" p:userService-ref="userService"/>
 	<bean id="bookAction" class="cn.guardskill.action.BookAction" 
-	scope="prototype" p:bookService-ref="BookService"/>
+	scope="prototype" p:bookService-ref="bookService"
+	p:userService-ref="userService"/>
 
 	<!-- 配置事务管理Bean -->
 	<bean id="transactionManager"

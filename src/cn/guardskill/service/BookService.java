@@ -1,9 +1,10 @@
 package cn.guardskill.service;
 
+import java.util.List;
+
 import cn.guardskill.orm.Book;
 
 public interface BookService {
 	Integer  addBook(Book book,Integer uId);
-	Book findByKey(Integer uName);
-	Book findByName(String uName);
+	List<Book> findPage(Integer pageNo);
 }

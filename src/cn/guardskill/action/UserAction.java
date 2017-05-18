@@ -3,6 +3,8 @@ package cn.guardskill.action;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -15,6 +17,7 @@ public class UserAction extends ActionSupport{
 	private UserService userService;
 	//this interface is implement by UserServiceImp (Spring bean)
 	private User user;	
+	
 	/* for AJAX output*/
 	 private InputStream inputStream;  
 	 /*user login*/
@@ -35,12 +38,8 @@ public class UserAction extends ActionSupport{
 		 else 
 			 {
 			 ctx.getSession().put("UID", userdata.getuId());
-			 //put the data to the memory
-			 if(userdata.getuType()==null) return SUCCESS;
-			 else if(userdata.getuType()==1) return "student";
-			 else if(userdata.getuType()==2) return "manager";
-			 else if (userdata.getuType()==3)return "admin";
-			 else return ERROR;
+     		 //put the data to the memory
+			  return SUCCESS;
 			 }
 	 }
 	 /*user sign up*/
@@ -77,9 +76,8 @@ public class UserAction extends ActionSupport{
 	}
 	public String userOut() throws IOException
 	{
-	if(ActionContext.getContext().getSession().remove("UID")==null)
-    return ERROR;  //remove fail
-	else return SUCCESS;  //remove success
+	ActionContext.getContext().getSession().remove("UID");
+    return SUCCESS;  //remove success
 	}
 
 	
