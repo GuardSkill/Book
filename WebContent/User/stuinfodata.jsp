@@ -24,21 +24,22 @@ request.getServerPort()+path+"/";
 				<nav class="navbar navbar-default navbar-inverse navbar-fixed-top"
 					role="navigation">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="User/admshowdata.jsp">首页</a>
+					<a class="navbar-brand" href="showData">个人首页</a>
 				</div>
 
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="User/admshowdata.jsp">人员信息</a></li>
-
+						<li ><a href="showData">图书信息</a></li>
+						<li class="active"><a href="showInfo">我的借阅信息</a></li>
 					</ul>
 
-					<form class="navbar-form navbar-left" role="search">
+					<form class="navbar-form navbar-left" role="search"
+						action="findBook">
 						<div class="form-group">
 							<input type="text" class="form-control" />
 						</div>
-						<button type="submit" class="btn btn-default">查人</button>
+						<button type="submit" class="btn btn-default">查书</button>
 					</form>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="userOut">退出登录</a></li>
@@ -54,39 +55,41 @@ request.getServerPort()+path+"/";
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>编号</th>
-					<th>人员</th>
-					<th>最后登录时间</th>
-					<th>状态</th>
+					<th>SDN号</th>
+					<th>书名</th>
+					<th>借出时间</th>
+					<th>截至时间</th>
+					<th>操作</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>1</td>
-					<td>管理员1</td>
-					<td>01/04/2012</td>
-					<td>online</td>
-				</tr>
-				<tr class="success">
-					<td>2</td>
-					<td>管理员2</td>
-					<td>01/04/2012</td>
-					<td>Approved</td>
-				</tr>
-				<tr class="error">
-					<td>3</td>
-					<td>管理员3</td>
-					<td>02/04/2012</td>
-					<td>Declined</td>
-				</tr>
-				<tr class="warning">
-					<td>4</td>
-					<td>管理员4</td>
-					<td>03/04/2012</td>
-					<td>Pending</td>
-				</tr>
+				<s:iterator value="infos" var="in" status="st">
+
+					<tr
+						class="<s:if test="#st.even">success</s:if>
+						<s:else>error</s:else>">
+						<td><s:property value="iBook.bId" /></td>
+						<td><s:property value="iBook.bName" /></td>
+						<td><s:property value="iFirstTime" /></td>
+						<td><s:property value="iReturnTime" /></td>
+						<td><a href="remvInfo?info.iId=<s:property value="iId"/>">
+								<button type="button" class="btn btn-default btn-primary">
+									还书</button>
+						</a></td>
+					</tr>
+				</s:iterator>
 			</tbody>
 		</table>
+		<s:actionmessage />
+		<ul class="pagination">
+			<li><a href="showInfo?pageop=-1">Prev</a></li>
+			<li><a href="showInfo?page=1">1</a></li>
+			<li><a href="showInfo?page=2">2</a></li>
+			<li><a href="showInfo?page=3">3</a></li>
+			<li><a href="showInfo?page=4">4</a></li>
+			<li><a href="showInfo?page=5">5</a></li>
+			<li><a href="showInfo?pageop=1">Next</a></li>
+		</ul>
 	</div>
 </body>
 </html>

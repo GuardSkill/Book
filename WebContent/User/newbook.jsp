@@ -24,13 +24,13 @@
 				<nav class="navbar navbar-default navbar-inverse navbar-fixed-top"
 					role="navigation">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="#">首页</a>
+					<a class="navbar-brand" href="showData">个人首页</a>
 				</div>
 
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li ><a href="User/manshowdata.jsp">图书信息</a></li>
+						<li ><a href="showData">图书信息</a></li>
 						<li class="active"><a href="User/newbook.jsp">添加图书</a></li>
 
 					</ul>
@@ -39,10 +39,10 @@
 						<div class="form-group">
 							<input type="text" class="form-control" />
 						</div>
-						<button type="submit" class="btn btn-default">查书</button>
+						<button type="submit" placeholder="书名或者书ID" class="btn btn-default">查书</button>
 					</form>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">退出登录</a></li>
+						<li><a href="userOut">退出登录</a></li>
 					</ul>
 				</div>
 				</nav>

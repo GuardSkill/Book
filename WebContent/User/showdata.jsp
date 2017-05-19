@@ -34,14 +34,14 @@
 
 					</ul>
 
-					<form class="navbar-form navbar-left" role="search">
+					<form class="navbar-form navbar-left" role="search" action="findBook">
 						<div class="form-group">
-							<input type="text" class="form-control" />
+							<input type="text" name="param" class="form-control"  placeholder="书名或者书ID"/>
 						</div>
-						<button type="submit" class="btn btn-default">查书</button>
+						<button type="submit" class="btn btn-default"  placeholder="书名或者书ID">查书</button>
 					</form>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">退出登录</a></li>
+						<li><a href="userOut">退出登录</a></li>
 					</ul>
 				</div>
 				</nav>
@@ -64,26 +64,15 @@
 			</thead>
 			<tbody>
 				<s:iterator value="books" var="bo" status="st">
-					<s:if test="#st.even">
-						<tr class="success">
-							<td><s:property value="bName"></s:property></td>
-							<td><s:property value="bWriter"></s:property></td>
-							<td><s:property value="bPress"></s:property></td>
-							<td><s:property value="bNownum"></s:property></td>
-							<td><s:property value="bMaxnum"></s:property></td>
-							<td><s:property value="bDesc"></s:property></td>
+						<tr class="<s:if test="#st.even">success</s:if>
+						<s:else>error</s:else>">
+								<td><s:property value="bName"/></td>
+							<td><s:property value="bWriter"/></td>
+							<td><s:property value="bPress"/></td>
+							<td><s:property value="bNownum"/></td>
+							<td><s:property value="bMaxnum"/></td>
+							<td><s:property value="bDesc"/></td>
 						</tr>
-					</s:if>
-					<s:else>
-						<tr class="error">
-							<td><s:property value="bName"></s:property></td>
-							<td><s:property value="bWriter"></s:property></td>
-							<td><s:property value="bPress"></s:property></td>
-							<td><s:property value="bNownum"></s:property></td>
-							<td><s:property value="bMaxnum"></s:property></td>
-							<td><s:property value="bDesc"></s:property></td>
-						</tr>
-					</s:else>
 					</s:iterator>
 			</tbody>
 		</table>

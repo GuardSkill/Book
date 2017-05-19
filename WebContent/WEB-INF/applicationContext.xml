@@ -45,16 +45,21 @@
 	p:sessionFactory-ref="sessionFactory" />
 	<bean id="bookDao" class="cn.guardskill.dao.BookDaoIm
 	" p:sessionFactory-ref="sessionFactory" />
-	<bean id="userService" class="cn.guardskill.service.UserServiceIm" 
+	<bean id="infoDao" class="cn.guardskill.dao.InfoDaoIm"
+	 p:sessionFactory-ref="sessionFactory" />
+	<bean id="userService" class="cn.guardskill.service.UserServiceIm"
 	p:userDao-ref="userDao" />
 	<bean id="bookService" class="cn.guardskill.service.BookServiceIm"
-		p:userDao-ref="userDao" p:bookDao-ref="bookDao"/>
+		p:userDao-ref="userDao" p:bookDao-ref="bookDao" />
+	<bean id="infoService" class="cn.guardskill.service.InfoServiceIm"
+		p:userDao-ref="userDao" p:infoDao-ref="infoDao" 
+		p:bookDao-ref="bookDao" />
 	<!-- map struts's action to really entity -->
-	<bean id="userAction" class="cn.guardskill.action.UserAction" 
-	scope="prototype" p:userService-ref="userService"/>
-	<bean id="bookAction" class="cn.guardskill.action.BookAction" 
+	<bean id="userAction" class="cn.guardskill.action.UserAction"
+		scope="prototype" p:userService-ref="userService" />
+	<bean id="dataAction" class="cn.guardskill.action.DataAction" 
 	scope="prototype" p:bookService-ref="bookService"
-	p:userService-ref="userService"/>
+	p:userService-ref="userService" p:infoService-ref="infoService"/>
 
 	<!-- 配置事务管理Bean -->
 	<bean id="transactionManager"

@@ -47,15 +47,26 @@
 			<result name="success">/login.jsp</result>
 		</action>
    		 
-		<action name="newBook" class="bookAction" method="newBook">
+		<action name="newBook" class="dataAction" method="newBook">
 			<result name="none">/User/newbook.jsp</result>
 			<result name="success">/User/welcome.jsp</result>
 		</action>
-		<action name="showData" class="bookAction" method="showData">
+		<action name="showData" class="dataAction" method="showData">
 			<result name="success">/User/showdata.jsp</result>
 			<result name="student">/User/stushowdata.jsp</result>
 			<result name="manager">/User/manshowdata.jsp</result>
 			<result name="admin">/User/admshowdata.jsp</result>
+		</action>
+		<action name="findBook" class="dataAction" method="findBook">
+			<result name="success">/User/showdata.jsp</result>
+		</action>
+		<action name="newInfo" class="dataAction" method="newInfo">
+			<result name="success">showInfo</result>
+			<result name="none">/User/stushowdata.jsp</result>
+		</action>
+		<action name="showInfo" class="dataAction" method="showInfo">
+			<result name="success">/User/stuinfodata.jsp</result>
+			<result name="none">/User/stushowdata.jsp</result>
 		</action>
 	</package>
 </struts>

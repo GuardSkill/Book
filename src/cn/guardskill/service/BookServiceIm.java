@@ -2,11 +2,13 @@ package cn.guardskill.service;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import cn.guardskill.dao.BookDao;
 import cn.guardskill.dao.UserDao;
 import cn.guardskill.orm.Book;
 import cn.guardskill.orm.User;
-
+@Transactional
 public class BookServiceIm  implements  BookService{
 	private BookDao bookDao;
 	private UserDao userDao;
@@ -40,5 +42,8 @@ public class BookServiceIm  implements  BookService{
 	public List<Book> findPage(Integer pageNo) {
 		return bookDao.findAllByPage(pageNo,5);
 	}
-
+	public List<Book> findPageByNameOrWriter(Integer pageNo,String param)
+	{
+		return  bookDao.findNameOrWriterByPage(pageNo, 5, param);	
+	}
 }

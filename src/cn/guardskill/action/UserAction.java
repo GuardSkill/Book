@@ -77,6 +77,7 @@ public class UserAction extends ActionSupport{
 	public String userOut() throws IOException
 	{
 	ActionContext.getContext().getSession().remove("UID");
+	ActionContext.getContext().getSession().remove("PAGE");
     return SUCCESS;  //remove success
 	}
 

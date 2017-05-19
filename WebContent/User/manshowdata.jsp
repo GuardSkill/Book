@@ -24,13 +24,13 @@ request.getServerPort()+path+"/";
 				<nav class="navbar navbar-default navbar-inverse navbar-fixed-top"
 					role="navigation">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="User/manshowdata.jsp">个人首页</a>
+					<a class="navbar-brand" href="showData">个人首页</a>
 				</div>
 
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="User/manshowdata.jsp"">图书信息</a></li>
+						<li class="active"><a href="showData">图书信息</a></li>
 						<li ><a href="User/newbook.jsp">添加图书</a></li>
 
 					</ul>
@@ -42,7 +42,7 @@ request.getServerPort()+path+"/";
 					<button type="submit" class="btn btn-default">查书</button>
 				</form>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">退出登录</a></li>
+					<li><a href="userOut">退出登录</a></li>
 				</ul>
 				</div>
 				</nav>
@@ -56,79 +56,40 @@ request.getServerPort()+path+"/";
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>
-							编号
-						</th>
-						<th>
-							产品
-						</th>
-						<th>
-							入库时间
-						</th>
-						<th>
-							在库数量
-						</th>
+						<th>ISBN号</th>
+						<th>书名</th>
+						<th>作者</th>
+						<th>出版社</th>
+						<th>现存数</th>
+						<th>总数</th>
+						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>
-							1
-						</td>
-						<td>
-							高等数学
-						</td>
-						<td>
-							01/04/2012
-						</td>
-						<td>
-							1
-						</td>
-					</tr>
-					<tr class="success">
-						<td>
-							2
-						</td>
-						<td>
-							高等数学
-						</td>
-						<td>
-							01/04/2012
-						</td>
-						<td>
-							2
-						</td>
-					</tr>
-					<tr class="error">
-						<td>
-							3
-						</td>
-						<td>
-							高等数学
-						</td>
-						<td>
-							02/04/2012
-						</td>
-						<td>
-							3
-						</td>
-					</tr>
-					<tr class="warning">
-						<td>
-							4
-						</td>
-						<td>
-							高等数学
-						</td>
-						<td>
-							03/04/2012
-						</td>
-						<td>
-							4
-						</td>
-	               </tr>	
+					<s:iterator value="books" var="bo" status="st">
+						<tr class="<s:if test="#st.even">success</s:if>
+						<s:else>error</s:else>">
+					     	<td><s:property value="bId"></s:property></td>
+							<td><s:property value="bName"></s:property></td>
+							<td><s:property value="bWriter"></s:property></td>
+							<td><s:property value="bPress"></s:property></td>
+							<td><s:property value="bNownum"></s:property></td>
+							<td><s:property value="bMaxnum"></s:property></td>
+							<td> <button type="button" 
+							class="btn btn-default btn-primary">出库</button></td>
+						</tr>
+					</s:iterator>
 				</tbody>
 			</table>
+			<ul class="pagination">
+			<li><a href="showData?pageop=-1">Prev</a></li>
+			<li><a href="showData?page=1">1</a></li>
+			<li><a href="showData?page=2">2</a></li>
+			<li><a href="showData?page=3">3</a></li>
+			<li><a href="showData?page=4">4</a></li>
+			<li><a href="showData?page=5">5</a></li>
+			<li><a href="showData?pageop=1">Next</a></li>
+		</ul>
 </div>
 </body>
 </html>

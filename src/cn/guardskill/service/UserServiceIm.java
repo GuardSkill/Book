@@ -36,6 +36,7 @@ public class UserServiceIm implements UserService{
 
 	@Override
 	public User findByKey(Integer uId) {
+		
 		return userDao.get(User.class,uId);
 	}
 	public User findByName(String uName)
