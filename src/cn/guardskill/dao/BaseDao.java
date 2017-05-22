@@ -11,4 +11,6 @@ public interface BaseDao<T> {
 	void delet(Class<T> entityClazz,Serializable id);
 	List<T> findAll(Class<T> entityClazz);
 	long findCount(Class<T> entityClazz);
+	List<T> findAllByPage(Class<T> entityClazz,int pageNo,int pageSize);
+	boolean isNum(String str);
 }

@@ -16,80 +16,91 @@ request.getServerPort()+path+"/";
   <script src="js/jquery-1.10.2.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
 <title>welcome</title>
+<style type="text/css">
+#strutsmessage {
+	font-size: 12px;
+	color: #F00;
+}
+</style>
 </head>
-<body>	
-<div class="container">
-	<div class="row clearfix">
+<body>
+	<div class="container">
+		<div class="row clearfix">
 			<div class="col-md-12 column">
 				<nav class="navbar navbar-default navbar-inverse navbar-fixed-top"
 					role="navigation">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="showData">个人首页</a>
+					<a class="navbar-brand" href="showData?page=1">个人首页</a>
 				</div>
 
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="showData">图书信息</a></li>
-						<li ><a href="User/newbook.jsp">添加图书</a></li>
+						<li class="active"><a href="showData?page=1">图书信息</a></li>
+						<li><a href="User/newbook.jsp">添加图书</a></li>
 
 					</ul>
-				
-				<form class="navbar-form navbar-left" role="search">
-					<div class="form-group">
-						<input type="text" class="form-control" />
-					</div>
-					<button type="submit" class="btn btn-default">查书</button>
-				</form>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="userOut">退出登录</a></li>
-				</ul>
+
+					<form class="navbar-form navbar-left" role="search"
+						action="findBook">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="书名/ISBN号" />
+						</div>
+						<button type="submit" class="btn btn-default">查书</button>
+					</form>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="outUser">退出登录</a></li>
+					</ul>
 				</div>
 				</nav>
-				
+
 			</div>
 		</div>
-			<div class="page-header" >
-				<h1>Azure
-				</h1>
-			</div>
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>ISBN号</th>
-						<th>书名</th>
-						<th>作者</th>
-						<th>出版社</th>
-						<th>现存数</th>
-						<th>总数</th>
-						<th>操作</th>
-					</tr>
-				</thead>
-				<tbody>
-					<s:iterator value="books" var="bo" status="st">
-						<tr class="<s:if test="#st.even">success</s:if>
+		<div class="page-header">
+			<h1>Azure</h1>
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ISBN号</th>
+					<th>书名</th>
+					<th>作者</th>
+					<th>热度</th>
+					<th>出版社</th>
+					<th>现存数</th>
+					<th>总数</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<s:iterator value="books" var="bo" status="st">
+					<tr
+						class="<s:if test="#st.even">success</s:if>
 						<s:else>error</s:else>">
-					     	<td><s:property value="bId"></s:property></td>
-							<td><s:property value="bName"></s:property></td>
-							<td><s:property value="bWriter"></s:property></td>
-							<td><s:property value="bPress"></s:property></td>
-							<td><s:property value="bNownum"></s:property></td>
-							<td><s:property value="bMaxnum"></s:property></td>
-							<td> <button type="button" 
-							class="btn btn-default btn-primary">出库</button></td>
-						</tr>
-					</s:iterator>
-				</tbody>
-			</table>
-			<ul class="pagination">
-			<li><a href="showData?pageop=-1">Prev</a></li>
-			<li><a href="showData?page=1">1</a></li>
-			<li><a href="showData?page=2">2</a></li>
-			<li><a href="showData?page=3">3</a></li>
-			<li><a href="showData?page=4">4</a></li>
-			<li><a href="showData?page=5">5</a></li>
-			<li><a href="showData?pageop=1">Next</a></li>
+						<td><s:property value="bId" /></td>
+						<td><s:property value="bName" /></td>
+						<td><s:property value="bWriter" /></td>
+						<td><s:property value="bHot" /></td>
+						<td><s:property value="bPress" /></td>
+						<td><s:property value="bNownum" /></td>
+						<td><s:property value="bMaxnum" /></td>
+						<td><a href="remvBook?book.bId=<s:property value="bId"/>">
+								<button type="button" class="btn btn-default btn-primary">出库</button>
+						</a></td>
+					</tr>
+				</s:iterator>
+			</tbody>
+		</table>
+		<span id="strutsmessage"><s:actionmessage /> </span>
+		<ul class="pagination">
+			<li><a href="showBook?pageop=-1">Prev</a></li>
+			<s:iterator begin="1" end="5" status="stat">
+				<li><a href="showBook?page=<s:property value="#stat.count" />">
+						<s:property value="#stat.count" />
+				</a></li>
+			</s:iterator>
+			<li><a href="showBook?pageop=1">Next</a></li>
 		</ul>
-</div>
+	</div>
 </body>
 </html>

@@ -16,6 +16,12 @@ request.getServerPort()+path+"/";
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <title>welcome</title>
+<style type="text/css">
+#strutsmessage {
+	font-size: 12px;
+	color: #F00;
+}
+</style>
 </head>
 <body>
 	<div class="container">
@@ -24,24 +30,24 @@ request.getServerPort()+path+"/";
 				<nav class="navbar navbar-default navbar-inverse navbar-fixed-top"
 					role="navigation">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="User/admshowdata.jsp">首页</a>
+					<a class="navbar-brand" href="showUser?page=1">首页</a>
 				</div>
 
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="User/admshowdata.jsp">人员信息</a></li>
+						<li class="active"><a href="showUser?page=1">人员信息</a></li>
 
 					</ul>
 
-					<form class="navbar-form navbar-left" role="search">
+					<form class="navbar-form navbar-left" role="search" action="findUser">
 						<div class="form-group">
-							<input type="text" class="form-control" />
+							<input type="text" class="form-control" name="param"/>
 						</div>
 						<button type="submit" class="btn btn-default">查人</button>
 					</form>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="userOut">退出登录</a></li>
+						<li><a href="outUser">退出登录</a></li>
 					</ul>
 				</div>
 				</nav>
@@ -56,37 +62,40 @@ request.getServerPort()+path+"/";
 				<tr>
 					<th>编号</th>
 					<th>人员</th>
-					<th>最后登录时间</th>
-					<th>状态</th>
+					<th>邮箱</th>
+					<th>种类</th>
+					<th>操作</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>1</td>
-					<td>管理员1</td>
-					<td>01/04/2012</td>
-					<td>online</td>
-				</tr>
-				<tr class="success">
-					<td>2</td>
-					<td>管理员2</td>
-					<td>01/04/2012</td>
-					<td>Approved</td>
-				</tr>
-				<tr class="error">
-					<td>3</td>
-					<td>管理员3</td>
-					<td>02/04/2012</td>
-					<td>Declined</td>
-				</tr>
-				<tr class="warning">
-					<td>4</td>
-					<td>管理员4</td>
-					<td>03/04/2012</td>
-					<td>Pending</td>
-				</tr>
+		<s:iterator value="users" var="us" status="st">
+						<tr class="<s:if test="#st.even">success</s:if>
+						<s:else>error</s:else>">
+					     	<td><s:property value="uId"/></td>
+							<td><s:property value="uName"/></td>
+							<td><s:property value="uEmail"/></td>
+							<td><s:property value="uType" /></td>
+							<td><a href="remvUser?user.uId=<s:property value="uId"/>"> 
+							<button type="button" class="btn btn-default btn-primary" >删除</button></a>
+							<a href="updateUser?user.uId=<s:property value="uId"/>&op=+1"> 
+							<button type="button" class="btn btn-default btn-primary" >提权</button></a>
+							<a href="updateUser?user.uId=<s:property value="uId"/>&op=-1"> 
+							<button type="button" class="btn btn-default btn-primary" >降权</button></a>
+							</td>
+						</tr>
+					</s:iterator>
 			</tbody>
 		</table>
+		<span id="strutsmessage"><s:actionmessage /> </span>
+		<ul class="pagination">
+			<li><a href="showUser?pageop=-1">Prev</a></li>
+			<s:iterator begin="1" end="5" status="stat">
+				<li><a href="showUser?page=<s:property value="#stat.count" />">
+						<s:property value="#stat.count" />
+				</a></li>
+			</s:iterator>
+			<li><a href="showUser?pageop=1">Next</a></li>
+		</ul>
 	</div>
 </body>
 </html>

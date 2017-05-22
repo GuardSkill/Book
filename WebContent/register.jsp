@@ -107,7 +107,7 @@ input {
 
 	<div id="login">
 		<h1>sign up</h1>
-		<form id="myForm" name="myForm" action="userAdd" method="post">
+		<form id="myForm" name="myForm" action="addUser" method="post">
 			<input name="user.uName" class="input1" required="required"
 				placeholder="用户名" type="text" id="uName" /> <span id="show">
 			</span> <input name="user.uPassword" class="input1" required="required"

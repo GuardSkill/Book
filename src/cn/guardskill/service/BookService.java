@@ -6,6 +6,7 @@ import cn.guardskill.orm.Book;
 
 public interface BookService {
 	Integer  addBook(Book book,Integer uId);
-	List<Book> findPage(Integer pageNo);
+	boolean  remvBook(Integer bId,Integer uId);
+	List<Book> findbyPage(Integer pageNo);
 	List<Book> findPageByNameOrWriter(Integer pageNo,String param);
 }

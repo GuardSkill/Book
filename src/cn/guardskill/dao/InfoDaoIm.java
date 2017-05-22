@@ -1,10 +1,7 @@
 package cn.guardskill.dao;
 
 import java.util.List;
-
 import org.hibernate.Query;
-
-import cn.guardskill.orm.Book;
 import cn.guardskill.orm.Info;
 
 
@@ -26,4 +23,5 @@ public class InfoDaoIm extends UniversalDaoIm<Info> implements InfoDao
 				.setParameter(0, uId);
 		return query.setFirstResult((pageNo-1)*pageSize).setMaxResults(pageSize).list();
    }
+	
 }

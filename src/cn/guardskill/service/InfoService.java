@@ -9,4 +9,5 @@ public interface InfoService {
 	boolean newInfo(Integer uid,Integer bid);
 	boolean ifAlreadyExist(Integer uid,Integer bid);
 	List<Info> findPageByUid(Integer pageNo,Integer uId);
+	boolean removeInfo(Integer iId);
 }

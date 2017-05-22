@@ -16,6 +16,12 @@ request.getServerPort()+path+"/";
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <title>welcome</title>
+<style type="text/css">
+#strutsmessage {
+	font-size: 12px;
+	color: #F00;
+}
+</style>
 </head>
 <body>
 	<div class="container">
@@ -24,14 +30,14 @@ request.getServerPort()+path+"/";
 				<nav class="navbar navbar-default navbar-inverse navbar-fixed-top"
 					role="navigation">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="showData">个人首页</a>
+					<a class="navbar-brand" href="showData?page=1">个人首页</a>
 				</div>
 
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li ><a href="showData">图书信息</a></li>
-						<li class="active"><a href="showInfo">我的借阅信息</a></li>
+						<li ><a href="showData?page=1">图书信息</a></li>
+						<li class="active"><a href="showInfo?page=1">我的借阅信息</a></li>
 					</ul>
 
 					<form class="navbar-form navbar-left" role="search"
@@ -42,7 +48,7 @@ request.getServerPort()+path+"/";
 						<button type="submit" class="btn btn-default">查书</button>
 					</form>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="userOut">退出登录</a></li>
+						<li><a href="outUser">退出登录</a></li>
 					</ul>
 				</div>
 				</nav>
@@ -55,7 +61,7 @@ request.getServerPort()+path+"/";
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>SDN号</th>
+					<th>ISBN号</th>
 					<th>书名</th>
 					<th>借出时间</th>
 					<th>截至时间</th>
@@ -80,7 +86,7 @@ request.getServerPort()+path+"/";
 				</s:iterator>
 			</tbody>
 		</table>
-		<s:actionmessage />
+		<span id="strutsmessage"><s:actionmessage/> </span>
 		<ul class="pagination">
 			<li><a href="showInfo?pageop=-1">Prev</a></li>
 			<li><a href="showInfo?page=1">1</a></li>

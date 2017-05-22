@@ -15,9 +15,11 @@ public class LoginInterceptor extends MethodFilterInterceptor{
 	public String doIntercept(ActionInvocation invocation) throws Exception {
 		Object login=ActionContext.getContext().getSession().get("UID");
 		if(null==login){
+			System.out.println("No login");
 			return "nologin";
 			}
 		return invocation.invoke();
 	}
+
 
 }

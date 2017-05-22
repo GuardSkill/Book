@@ -91,7 +91,7 @@ input {
 	margin-top: 15px;
 }
 
-#show {
+#strutsmessage {
 	font-size: 12px;
 	color: #F00;
 }
@@ -104,12 +104,12 @@ input {
 
 	<div id="login">
 		<h1>Login</h1>
-		<form action="userLogin" method="post">
+		<form action="loginUser" method="post">
 			<input name="user.uName" required="required" placeholder="用户名"
 				type="text" /> 
 			<input name="user.uPassword"
 				required="required" placeholder="密码" type="password" /> 
-			 <span id="show"><s:actionmessage/> </span>
+			 <span id="strutsmessage"><s:actionmessage/> </span>
 		  <button class="but" type="submit">登录</button>
 		  <button class="but" type="button" onclick="window.location.href='register.jsp'">注册</button>
 		</form>

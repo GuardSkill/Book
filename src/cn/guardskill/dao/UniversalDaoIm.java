@@ -7,6 +7,8 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 
+import cn.guardskill.orm.Book;
+
 public class UniversalDaoIm<T> implements BaseDao<T> {
 	private SessionFactory sessionFactory;
 	public void setSessionFactory(SessionFactory sessionFactory) {
@@ -35,13 +37,19 @@ public class UniversalDaoIm<T> implements BaseDao<T> {
 		
 	}
 	public void delet(Class<T> entityClazz, Serializable id) {
-		getSessionFactory().getCurrentSession().createQuery("delete"+entityClazz.getSimpleName()
-		+"en where en.id=?0").setParameter("0", id).executeUpdate();
+		getSessionFactory().getCurrentSession().createQuery("delete "+entityClazz.getSimpleName()
+		+" en where en.id=?0").setParameter("0", id).executeUpdate();
 	}
 
 	public List<T> findAll(Class<T> entityClazz) {
-		return find("select en from "+entityClazz.getSimpleName()+"en");
+		return find("select en from "+entityClazz.getSimpleName()+" en");
 	}
+	
+	public List<T> findAllByPage(Class<T> entityClazz,int pageNo,int pageSize) 
+	 {
+		String hql = "from "+entityClazz.getSimpleName();
+		return findByPage(hql,pageNo,pageSize);
+    }
 
 	public long findCount(Class<T> entityClazz) {
 		List<?> l=find("select count(*) from "+entityClazz.getSimpleName());
@@ -89,4 +97,12 @@ public class UniversalDaoIm<T> implements BaseDao<T> {
 		}
 		return query.setFirstResult((pageNo-1)*pageSize).setMaxResults(pageSize).list();
 	}
+	public  boolean isNum(String str) {
+	    for (int i = 0; i < str.length(); i++) {
+	        if (!Character.isDigit(str.charAt(i))) {
+	            return false;  //if have a no digit element return false
+	        }
+	    }
+	    return true;
+	}//judge a str if a N+
 }

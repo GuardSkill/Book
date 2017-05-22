@@ -28,13 +28,15 @@ public class InfoServiceIm implements InfoService{
 		if(book.getbNownum()==0) return false;
 		user=userDao.get(User.class, uid);
 		info=new Info();
+		book.setbHot(book.getbHot()+1);
 		info.setiBook(book);
 		info.setiUser(user);
 		Date date=new Date();
+		/*
 		SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
-		System.out.println(df.format(date));
+		System.out.println(df.format(date)); */
 		info.setiFirstTime(date);
-		info.setiReturnTime(new Date(date.getTime()+30*24*60*60*1000));
+		info.setiReturnTime(new Date(date.getTime()+(long)30*24*60*60*1000));
 		info.setiStatus(1);
 		book.setbNownum(book.getbNownum()-1);  //nownum -1
 		System.out.println(book.getbNownum());
@@ -54,6 +56,22 @@ public class InfoServiceIm implements InfoService{
 		else return true;
         
 	}
+	public boolean removeInfo(Integer iId)
+	{
+		info=infoDao.get(Info.class, iId);
+		book=info.getiBook();
+		book.setbNownum(book.getbNownum()+1);
+		bookDao.save(book);
+		if(info.getiReturnTime().after(new Date()))
+		{
+		infoDao.delet(Info.class,iId);
+		return true;}
+		else {
+			infoDao.delet(Info.class,iId);
+			return false;
+		}
+	}
+	
 	public void setInfoDao(InfoDao infoDao) {
 		this.infoDao = infoDao;
 	}

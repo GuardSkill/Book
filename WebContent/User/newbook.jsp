@@ -16,6 +16,12 @@
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <title>welcome</title>
+<style type="text/css">
+#strutsmessage {
+	font-size: 12px;
+	color: #F00;
+}
+</style>
 </head>
 <body>
 	<div class="container">
@@ -42,7 +48,7 @@
 						<button type="submit" placeholder="书名或者书ID" class="btn btn-default">查书</button>
 					</form>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="userOut">退出登录</a></li>
+						<li><a href="outUser">退出登录</a></li>
 					</ul>
 				</div>
 				</nav>
@@ -52,7 +58,8 @@
 		<div class="page-header">
 			<h1>Azure</h1>
 		</div>
-		<form action="newGood" method="post" enctype="mutipart/form-data">
+		<span id="strutsmessage"><s:actionmessage/> </span>
+		<form action="newBook" method="post" >
 			<div class="form-group">
 				<input name="book.bName" type="text" class="form-control"
 					placeholder="书籍名称" />

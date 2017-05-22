@@ -11,14 +11,7 @@ public class BookDaoIm extends UniversalDaoIm<Book>
 implements BookDao
 {
 	@SuppressWarnings("unchecked")
-	public List<Book> findAllByPage(int pageNo,int pageSize) 
-	 {
-		String hql = "from Book";
-		return getSessionFactory().getCurrentSession().createQuery(hql).
-				setFirstResult((pageNo-1)*pageSize).setMaxResults(pageSize).list();
-    }
-	@SuppressWarnings("unchecked")
-	public List<Book> findNameOrWriterByPage(int pageNo,int pageSize,String param)
+	public List<Book> findPageByNameOrWriter(int pageNo,int pageSize,String param)
 	{
 		String hql = "from Book where bName like :name or bWriter like :name";
 		Query query = getSessionFactory().getCurrentSession().createQuery(hql)
@@ -36,5 +29,8 @@ implements BookDao
 		//setFirstResult： the first result to start query 
 		//the max number of results
 	}
-
+	public List<Book> findPageByNameOrId(int pageNo,int pageSize,String param)
+	{
+		return null;
+	}
 }

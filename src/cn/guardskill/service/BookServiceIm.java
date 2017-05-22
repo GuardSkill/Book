@@ -16,14 +16,42 @@ public class BookServiceIm  implements  BookService{
 	@Override
 	public Integer  addBook(Book book,Integer uId) {
 		user=userDao.get(User.class, uId);
-		if(user==null)
+		if(user==null||user.getuType()!=2)
 		{
-			System.out.println("uId Error|database error,No  user with the uId");
+			System.out.println("uId Error|database error");
 			return null;
 		}
+		if(book.getbName().trim().isEmpty()||book.getbWriter().trim().isEmpty()
+				||book.getbPress().trim().isEmpty()||book.getbDesc().trim().isEmpty()
+				||book.getbMaxnum()==null) return null;
+		//some codes need to be accomplish：check out if Exist a Book 
+		book.setbHot(0);
+		book.setbStatus(0);
+		book.setbNownum(book.getbMaxnum());
 		return (Integer) bookDao.save(book);
 	}
-
+	public boolean  remvBook(Integer bId,Integer uId) {
+		user=userDao.get(User.class, uId);
+		if(user==null||user.getuType()!=2)
+		{
+			System.out.println("uId Error|database error");
+			return false;
+		}
+		Book book=bookDao.get(Book.class, bId);
+		if(book.getbNownum()<book.getbMaxnum()) return false;
+		//If there is some books doesn't return to library 
+		bookDao.delet(Book.class,bId);
+		return true;
+	}
+	@Override
+	public List<Book> findbyPage(Integer pageNo) {
+		return bookDao.findAllByPage(Book.class,pageNo,5);
+	}
+	public List<Book> findPageByNameOrWriter(Integer pageNo,String param)
+	{
+		return  bookDao.findPageByNameOrWriter(pageNo, 5, param);	
+	}
+	
 
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
@@ -35,15 +63,5 @@ public class BookServiceIm  implements  BookService{
 
 	public void setBookDao(BookDao bookDao) {
 		this.bookDao = bookDao;
-	}
-
-
-	@Override
-	public List<Book> findPage(Integer pageNo) {
-		return bookDao.findAllByPage(pageNo,5);
-	}
-	public List<Book> findPageByNameOrWriter(Integer pageNo,String param)
-	{
-		return  bookDao.findNameOrWriterByPage(pageNo, 5, param);	
 	}
 }
