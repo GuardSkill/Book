@@ -7,8 +7,6 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 
-import cn.guardskill.orm.Book;
-
 public class UniversalDaoIm<T> implements BaseDao<T> {
 	private SessionFactory sessionFactory;
 	public void setSessionFactory(SessionFactory sessionFactory) {

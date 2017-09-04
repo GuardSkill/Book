@@ -22,11 +22,13 @@ public class BookServiceIm  implements  BookService{
 			return null;
 		}
 		if(book.getbName().trim().isEmpty()||book.getbWriter().trim().isEmpty()
+				||book.getbWriter().length()>20||book.getbName().length()>30
+				||book.getbPress().length()>20||book.getbDesc().length()>100
 				||book.getbPress().trim().isEmpty()||book.getbDesc().trim().isEmpty()
 				||book.getbMaxnum()==null) return null;
 		//some codes need to be accomplish：check out if Exist a Book 
 		book.setbHot(0);
-		book.setbStatus(0);
+		book.setbStatus(1);
 		book.setbNownum(book.getbMaxnum());
 		return (Integer) bookDao.save(book);
 	}
@@ -51,8 +53,10 @@ public class BookServiceIm  implements  BookService{
 	{
 		return  bookDao.findPageByNameOrWriter(pageNo, 5, param);	
 	}
-	
-
+	public List<Book> findPageByNameOrId(Integer pageNo,String param)
+	{
+	return bookDao.findPageByNameOrId(pageNo, 5, param);
+	}
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}

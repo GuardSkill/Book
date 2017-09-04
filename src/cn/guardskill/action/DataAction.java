@@ -25,11 +25,13 @@ public class DataAction extends ActionSupport {
 	private UserService userService;
 	private User user;
 	private InfoService infoService;
-	public void setInfoService(InfoService infoService) {
-		this.infoService = infoService;
-	}
 	
 	public String  showBook() throws Exception{
+		if(param!=null)	{	         //param if isEmpty	
+			if(!param.trim().isEmpty())  //*.jsp input param isEmpty?
+				return findBook();  //if *.jsp is in a finding status
+			}
+		
 		Integer uId=(Integer) ActionContext.getContext().getSession().get("UID");
 		user=userService.findByKey(uId);  //get the user's real instance by id
 		int type=user.getuType();
@@ -45,24 +47,31 @@ public class DataAction extends ActionSupport {
 			ActionContext.getContext().getSession().put("PAGE",page);
 			if(type==0) return SUCCESS;
 			else if(type==1) return "student";
-			else if(type==3) return "manager";
+			else if(type==2) return "manager";
 			else return ERROR;  //error uId
 		}
 	}
 	public String  findBook() throws Exception{
 		Integer uId=(Integer) ActionContext.getContext().getSession().get("UID");
 		user=userService.findByKey(uId);
-		if(user.getuType()==0||user.getuType()==1) //passenger or student
-		{
-			pageArithmetic();  //calculate the page the client want
-			books=bookService.findPageByNameOrWriter(page, param);
-			ActionContext.getContext().getSession().put("PAGE",page);
+		pageArithmetic();  //calculate the page the client want
+		if(user.getuType()==0||user.getuType()==1) 	{		//passenger or student
+			if(param.trim().isEmpty())  addActionMessage("输入为空");	
+			 //validate the input
+			else books=bookService.findPageByNameOrWriter(page, param);
 			//put current page to PAGE in memory
+			ActionContext.getContext().getSession().put("PAGE",page);
+			if(user.getuType()==1) return "student";
+			else return SUCCESS;
 		}
-		if(user.getuType()==3)
-		{}
-		return SUCCESS;
-		
+		if(user.getuType()==2){
+			if(param.trim().isEmpty())  addActionMessage("输入为空");	
+			 //validate the input
+			else books=bookService.findPageByNameOrId(page, param);
+			ActionContext.getContext().getSession().put("PAGE",page);
+			return "manager";
+		}
+		else{ addActionMessage("权限不正确，请重登");	return SUCCESS;}
 	}
 	public String newBook()  throws Exception{
 		Integer uId=(Integer) ActionContext.getContext().getSession().get("UID");
@@ -86,7 +95,7 @@ public class DataAction extends ActionSupport {
 		if(bookService.remvBook(book.getbId(), uId)==false) 
 		{
 		addActionMessage("出库失败，现有数量小于最大数量");
-		return NONE;
+		return  SUCCESS;
 		}
 	else 
 		{
@@ -179,5 +188,11 @@ public class DataAction extends ActionSupport {
 	}
 	public List<Book> getBooks() {
 		return books;
+	}
+	public void setInfoService(InfoService infoService) {
+		this.infoService = infoService;
+	}
+	public String getParam() {
+		return param;
 	}
 }

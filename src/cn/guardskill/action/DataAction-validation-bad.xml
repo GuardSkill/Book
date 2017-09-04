@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE validators PUBLIC
+	"-//Apache Struts//XWork Validator 1.0.3//EN"
+	"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+	<validators>
+	<field name="book.bName">
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>请输入书名</message>
+		</field-validator>
+	</field>
+	<field name="book.bWriter">
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>请输入作者</message>
+		</field-validator>
+	</field>
+	<field name="book.bPress">
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>请输入出版社</message>
+		</field-validator>
+	</field>
+	<field name="book.bDesc">
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>请输入描述</message>
+		</field-validator>
+	</field>
+	<field name="book.bMaxnum">
+        <field-validator type="requiredstring">  
+            <param name="trim">true</param>  
+            <message>数量不能为空</message>  
+        </field-validator>  
+        <field-validator type="int">  
+            <param name="min">0</param>  
+            <message>请输入大于0的书籍数量</message>  
+        </field-validator>  
+    </field>  
+	</validators>

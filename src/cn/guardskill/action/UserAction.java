@@ -25,21 +25,18 @@ public class UserAction extends ActionSupport{
  private InputStream inputStream;  
 	 /*user login*/
 	public String loginUser () throws Exception{
-		ActionContext ctx=ActionContext.getContext();//build ActionCtx
-		if(!validateLogin())  //input invalid
-			{
+		if(!validateLogin())  {//input invalid
 			addActionMessage("请输入4~10字符的数据");
 			return NONE;  
 			}
 		 User userNow=userService.loginUser(user);
-		 if(userNow==null)
-			 {
+		 if(userNow==null){
 			 addActionMessage("用户名或密码错误");
 			 return NONE;	//if login not success
 			 }
 		 else 
 			 {
-			 ctx.getSession().put("UID", userNow.getuId());
+			 ActionContext.getContext().getSession().put("UID", userNow.getuId());
      		 //put the data to the memory
 			 if(userNow.getuType()!=3) return SUCCESS;
 			 else return "admin";
@@ -65,16 +62,19 @@ public class UserAction extends ActionSupport{
 	{
 		if(!validateName())
 		{
-			inputStream=new ByteArrayInputStream("请好好输入"  
+			inputStream=new ByteArrayInputStream("请输入4~10字符的数据"  
 					.getBytes("UTF-8"));  
 		}
+		else
+		{
 		User existUser =userService.findByName(user.getuName());  
 	    //query if this uName is Already exist in database  
 		/*get response  	*/	
 		inputStream =(existUser==null)? new ByteArrayInputStream("用户名可用"  
 	                .getBytes("UTF-8"))  
 	            : new ByteArrayInputStream("用户名已存在"  
-	                .getBytes("UTF-8"));  
+	                .getBytes("UTF-8"));
+		}
 	    return NONE;  
 	}
 	public String outUser() throws IOException
@@ -85,6 +85,10 @@ public class UserAction extends ActionSupport{
 	}
 	public String showUser() throws IOException
 	{
+		if(param!=null)		        { //param if isEmpty
+			if(!param.trim().isEmpty())  //*.jsp input param isEmpty?
+				return findUser();  //if *.jsp is in a finding status
+			}
 		Integer uId=(Integer) ActionContext.getContext().getSession().get("UID");
 		user=userService.findByKey(uId);  //get the user's real instance by id
 		if(user.getuType()==3)
@@ -94,8 +98,10 @@ public class UserAction extends ActionSupport{
 		ActionContext.getContext().getSession().put("PAGE",page);
 		return SUCCESS;
 		}
-		else return ERROR;  //no permission
+		else  { addActionMessage("你拥有的权限不正确，请重新登录");	return SUCCESS;}
+		//no permission
 	}
+
 	public String remvUser() throws IOException{
 		Integer uId=(Integer) ActionContext.getContext().getSession().get("UID");
 		User userNow=userService.findByKey(uId);  //get the user's real instance by id
@@ -109,7 +115,7 @@ public class UserAction extends ActionSupport{
 			return SUCCESS;
 			}
 		}
-		else return ERROR;
+		else  { addActionMessage("你拥有的权限不正确，请重新登录");	return SUCCESS;}
 }
 	public String updateUser() throws IOException{
 		Integer uId=(Integer) ActionContext.getContext().getSession().get("UID");
@@ -126,7 +132,7 @@ public class UserAction extends ActionSupport{
 			return SUCCESS;
 			}
 		}
-		else return ERROR;
+		else { addActionMessage("你拥有的权限不正确，请重新登录");	return SUCCESS;}
 	}
 	public String findUser() throws IOException
 	{
@@ -134,11 +140,13 @@ public class UserAction extends ActionSupport{
 		user=userService.findByKey(uId);
 		if(user.getuType()==3){
 			pageArithmetic();   //calculate the page the client want
-			users=userService.findPageByNameOrId(page,param);
+			if(param.trim().isEmpty())  addActionMessage("输入为空");	
+			 //validate the input
+			else users=userService.findPageByNameOrId(page,param);
 			ActionContext.getContext().getSession().put("PAGE",page);
 			return SUCCESS;
 		}
-		else return ERROR;
+		else { addActionMessage("权限不正确，请重登");	return SUCCESS;}
 	}
 	protected Boolean validateName()
 	{
@@ -205,5 +213,8 @@ public class UserAction extends ActionSupport{
 	}
 	public void setParam(String param) {
 		this.param = param;
+	}
+	public String getParam() {
+		return param;
 	}
 }

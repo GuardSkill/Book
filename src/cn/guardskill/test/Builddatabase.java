@@ -13,7 +13,8 @@ public class Builddatabase {
  public static void main(String argv[]) throws Exception
  {
 	 Configuration conf=new Configuration().configure();
-	 SessionFactory sf=conf.buildSessionFactory();
+	 @SuppressWarnings("deprecation")
+	SessionFactory sf=conf.buildSessionFactory();
 	 Session sess=sf.openSession();
 	 Transaction tx=sess.beginTransaction();
 	 User u1=new User();

@@ -9,4 +9,5 @@ public interface BookService {
 	boolean  remvBook(Integer bId,Integer uId);
 	List<Book> findbyPage(Integer pageNo);
 	List<Book> findPageByNameOrWriter(Integer pageNo,String param);
+	List<Book> findPageByNameOrId(Integer pageNo,String param);
 }

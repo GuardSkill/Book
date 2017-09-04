@@ -41,12 +41,12 @@ public class UserDaoIm extends UniversalDaoIm<User> implements UserDao
 	{
 		String hql;
 		if(isNum(param)){  //if all char is a N+
-			 hql = "from User where uId =?0 or uName=?1 ";
-			 return findByPage(hql,pageNo,pageSize,Integer.parseInt(param),param);
+			 hql = "from User where uId =?0 or uName like ?1 ";
+			 return findByPage(hql,pageNo,pageSize,Integer.parseInt(param),'%' + param + '%');
 		}
 		else{
-			hql="from User where uName=?0";
-			return findByPage(hql,pageNo,pageSize,param);
+			hql="from User where uName like ?0";
+			return findByPage(hql,pageNo,pageSize,'%' + param + '%');
 		}
 	}
 }

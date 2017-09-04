@@ -6,7 +6,7 @@ String path=request.getContextPath();
 String basePath=request.getScheme()+"://"+request.getServerName()+":"+
 request.getServerPort()+path+"/";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <base href="<%=basePath%>" />
@@ -125,7 +125,7 @@ input {
     $("#uName").blur(function()  
     {  
         //post myForm's data to userExist action  
-        $.get("userExist" , $("#myForm").serializeArray() ,   
+        $.get("existUser" , $("#myForm").serializeArray() ,   
             //指定回调函数  
             function(data , statusText)  
             {  
